@@ -29,7 +29,7 @@ def main():
 
 
 
-        if misc["location"] == "Village":
+        if misc["location"].lower() == "village":
             clear_screen()
             print("=== Village ===")
             print("What would you like to do?")
@@ -182,24 +182,45 @@ def main():
         if choice == "3":
             clear_screen()
             print("=== Village ===")
-            print("Where would you lieke to go?")
+            print("Where would you like to go?")
             print("\n\n1. Spooky Cave.\n2. Mineshafts\n3. Village Outskirts.\n4. Dojo")
             choice = input("\n> ")
             if choice == "1":
+                misc["lastlocation"] = misc["location"]
                 misc["location"] = "Cave"
-                misc["lastlocation"] = "Village"
+
 
         
-        if misc["location"] == "Cave":
+        if misc["location"].lower() == "cave":
             if misc["cavevisits"] == 0:
-                misc["cavevisists"] = 1
+                misc["cavevisits"] = 1
                 clear_screen()
                 txt2()
-                combat(genenemy("Goblin", 10, 2, 5, 25, 2.2, 15),geneweap("Goblin Brass Knuckles", 40, 2, 30, False, False, 100))
-                txt3()
-            combat(genenemy("Bigger Goblin", 25, 2, 5, 25, 2.2, 15),geneweap("Goblin Dagger", 70, 10, 100, False, False, 100))
+                combat(genenemy("Goblin", 10, 100, 1, 75, 100, 150),geneweap("Goblin Brass Knuckles", 40, 4, 30, False, False, 100))
+                txt3()         # name, hp, dropgold, attack, luck, confidence, dropxp | name, wluck, damage, durability, ranged, magic, dropchance
+                combat(genenemy("Bigger Goblin", 25, 250, 3, 30, 1, 300),geneweap("Goblin Dagger", 70, 10, 100, False, False, 100))
+                txt4()
             clear_screen()
             print("=== Cave ===")
+            print("What would you like to do?")
+            print("\n\n1. Go into the shiny green area\n2. Enter into the rather dark area\n3. Leave")
+            choice = input("\n> ")
+            if choice == "1" or "2":
+                misc["lastlocation"] = misc["location"]
+                misc["location"] = "notadded"
+            if choice == "3":
+                misc["location"] = "Village"
+                misc["lastlocation"] = misc["location"]
+        
+
+
+        if misc["location"].lower() == "notadded":
+            clear_screen()
+            print("Sorry!\n\n\nThis place hasn't been added yet as this was made primarily in a 22 hour coding sprint! Enter literally anything to go back :3")
+            input("\n> ")
+            misc["location"] = misc["lastlocation"]
+        
+
             
 
             

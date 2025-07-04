@@ -192,3 +192,13 @@ def txt3():
     print(center_text("\033[1mWait- what's that?\033[0m"))
     time.sleep(1.5)
     clear_screen()
+
+def txt4():
+    clear_screen()
+    print(center_text("Now that.. That was close."))
+    input("\n\n\n\n")
+    clear_screen()
+    print(center_text("Now that.. That was close."))
+    print(center_text("Maybe I should get out of here.."))
+    input("\n\n\n\n")
+    clear_screen()

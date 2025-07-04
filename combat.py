@@ -90,14 +90,20 @@ def combat(enemy, weapon_drop):
 
                     if not player['ranged'] and not player['magic']: skillmult += player['swordskill']
                     elif player['magic']: skillmult += player['magicskill']
+
                     basedamage = ((luck_roll / 100) + 1) * player['weapondamage'] * skillmult
 
                     if player['damage'] != 0 and not player['ranged'] and not player['magic']: basedamage += player['damage']
                     basedamage = round(basedamage, 1)
+                    
                     enemy['hp'] -= basedamage
                     enemy['hp'] = max(round(enemy['hp'], 1), 0)
                     if player['weapondurability'] != False: player['weapondurability'] -= 1
-                    print(f"\nTotal Damage: {basedamage} +{player['damage']} due to raw strength.\n{enemy['name']} has {enemy['hp']} HP remaining.")
+                    for w in weapons:
+                        if w['name'] == player['weapon']:
+                            w['Durability'] = player['weapondurability']
+                            break
+                    print(f"\nYou did Total Damage: {basedamage} ({round(player['damage'], 1)} - Raw Strength | {round(basedamage - player['damage'], 1)} - Weapon).\n{enemy['name']} has {enemy['hp']} HP remaining.")
                     time.sleep(0.6)
                     input("\n\nCONTINUE")
 
@@ -179,7 +185,7 @@ def combat(enemy, weapon_drop):
                                 inventory[key] = {"weapon": w, "count": 1}
                             w_converted = {
                                 'name': w['name'],
-                                'Luck': w['luck'],
+                                'Luck': w['wluck'],
                                 'Damage': w['damage'],
                                 'Durability': w['durability'],
                                 'Obtained': True,
@@ -187,7 +193,7 @@ def combat(enemy, weapon_drop):
                                 'Magic': w['magic']
                             }
                             weapons.append(w_converted)
-                            print(f"You also found: {w['name']}!")
+                            print(f"You also found:\n\n\033[1m{w['name']}!\033[0m")
                         input("\n\nCONTINUE")
 
 
@@ -245,6 +251,7 @@ def combat(enemy, weapon_drop):
                 clear_screen()
                 print("Invalid weapon choice.")
             input("\n\nCONTINUE")
+            
 
         elif choice == "4":
             clear_screen()
