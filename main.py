@@ -1,5 +1,5 @@
 from game_data import player, inventory, weapons, enemy_templates, misc, armours
-from combat import combat, clear_screen
+from combat import combat, clear_screen, genenemy, geneweap
 from text import txt1, center_text
 import random
 import time
@@ -33,7 +33,7 @@ def main():
             clear_screen()
             print("=== Village ===")
             print("What would you like to do?")
-            print("\n\n1. Go to the shop\n2. Go to the mineshafts\n3. Explore\n4. Other")
+            print("\n\n1. Go to the shop\n2. Think really hard\n3. Explore\n4. Other")
             choice = input("\n> ")
             if choice == "4":
                 misc["location"] = "Other"
@@ -174,6 +174,33 @@ def main():
                         player["health"] = -99999999999999
                         exit()
 
+
+
+
+        if choice == "3":
+            clear_screen()
+            print("=== Village ===")
+            print("Where would you lieke to go?")
+            print("\n\n1. Spooky Cave.\n2. Mineshafts\n3. Village Outskirts.\n4. Dojo")
+            choice = input("\n> ")
+            if choice == "1":
+                misc["location"] = "Cave"
+                misc["lastlocation"] = "Village"
+
+        
+        if misc["location"] == "Cave":
+            if misc["cavevisits"] == 0:
+                clear_screen()
+                #txt2()
+                combat(genenemy("Goblin", 10, 5, 3, 20, 2.2, 15),geneweap("Goblin Brass Knuckles", 40, 6, 30, False, False, 70))
+                #txt3()ch
+                time.sleep(2)
+                combat(genenemy("Goblin", 25, 5, 5, 25, 2.2, 15))
+            clear_screen()
+            print("=== Cave ===")
+            
+
+            
 
 
 

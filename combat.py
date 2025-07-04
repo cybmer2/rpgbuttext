@@ -5,7 +5,35 @@ import os
 
 
 
+def geneweap(name, luck, damage, durability, ranged, magic, dropchance):
+    """Generate a weapon dictionary."""
+    weapon = {
+        "name": name,
+        "luck": luck,
+        "damage": damage,
+        "durability": durability,
+        "ranged": ranged,
+        "magic": magic,
+        "dropchance": dropchance,
+        "blessed": False  # Default no blessing
+    }
+    return weapon
 
+
+
+
+def genenemy(name, hp, dropgold, attack, luck, confidence, dropxp):
+    """Generate enemy dictionary."""
+    enemy = {
+        "name": name,
+        "hp": hp,
+        "dropgold": dropgold,
+        "attack": attack,
+        "luck": luck,
+        "confidence": confidence,
+        "dropxp": dropxp
+    }
+    return enemy
 
 
 def clear_screen():

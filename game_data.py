@@ -21,11 +21,14 @@ weapons = [
 ]
 
 
+enemy_weapons = [
+    {"name": "Fists", "Luck": 60, "Damage": 2, "Durability": False, "Obtained": True, "Ranged": False, "Magic": False},
 
+]
 
 
 enemy_templates = [
-    {"name": "Goblin", "hp": 10, "dropgold": 5, "attack": 3, "luck": 1000, "confidence": 2.2, "dropxp": 15},
+    {"name": "Goblin", "hp": 10, "dropgold": 5, "attack": 3, "luck": 1000, "confidence": 2.2, "dropxp": 15}, #"Goblin", 10, 5, 3, 1000, 2.2, 15
     {"name": "Golem", "hp": 40, "dropgold": 20, "attack": 5, "luck": 5, "confidence": 4, "dropxp": 50},
     {"name": "Skeleton", "hp": 15, "dropgold": 10, "attack": 5, "luck": 15, "confidence": 1.5, "dropxp": 10},
     {"name": "Dragon", "hp": 2500, "dropgold": 300000, "attack": 300, "luck": 65, "confidence": 9.4, "dropxp": 250000}
@@ -84,6 +87,7 @@ misc = {
 
     "location": "x",
     "lastlocation": "x",
+    "cavevisits": 0,
 
 
 }
