@@ -34,8 +34,8 @@ enemy_templates = [
 
 armours = [
 
-    {"name": "Naked", "protection": 0, "luckproof": 100, "swordres": 0, "magicres": 0,},
-    {"name": "Raggy clothes", "protection": 5, "luckproof": 0, "swordres": 0, "magicres": 0,},
+    {"name": "Naked", "protection": 0, "luckproof": 100, "swordres": 0, "magicres": 0, "Obtained": True},
+    {"name": "Raggy clothes", "protection": 5, "luckproof": 0, "swordres": 0, "magicres": 0, "Obtained": True},
 
 ]
 
