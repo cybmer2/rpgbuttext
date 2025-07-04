@@ -5,11 +5,11 @@ import os
 
 
 
-def geneweap(name, luck, damage, durability, ranged, magic, dropchance):
+def geneweap(name, wluck, damage, durability, ranged, magic, dropchance):
     """Generate a weapon dictionary."""
     weapon = {
         "name": name,
-        "luck": luck,
+        "wluck": wluck,
         "damage": damage,
         "durability": durability,
         "ranged": ranged,
@@ -22,13 +22,13 @@ def geneweap(name, luck, damage, durability, ranged, magic, dropchance):
 
 
 
-def genenemy(name, hp, dropgold, damage, luck, confidence, dropxp):
+def genenemy(name, hp, dropgold, attack, luck, confidence, dropxp):
     """Generate enemy dictionary."""
     enemy = {
         "name": name,
         "hp": hp,
         "dropgold": dropgold,
-        "damage": damage,
+        "attack": attack,
         "luck": luck,
         "confidence": confidence,
         "dropxp": dropxp
@@ -68,10 +68,14 @@ def combat(enemy, weapon_drop):
                 print("Attack? Y/N")
                 attackinp = input("> ")
                 if attackinp.lower() in ["y", "yes"]:
+
+
                     clear_screen()
                     luck = player["weaponluck"]
                     luck_roll = round(random.uniform(-luck, luck), 1)
                     if luck != 0:
+
+
                         clear_screen()
                         if luck_roll == luck: print(f"You got insanely lucky! (+{luck_roll}%)")
                         elif luck_roll >= 0.75 * luck: print(f"You got very lucky! (+{luck_roll}%)")
@@ -82,9 +86,12 @@ def combat(enemy, weapon_drop):
                         elif luck_roll <= -0.5 * luck: print(f"You got unlucky. ({luck_roll}%)")
                         else: print(f"You got mediocrely unlucky. ({luck_roll}%)")
                     skillmult = 1
+
+
                     if not player['ranged'] and not player['magic']: skillmult += player['swordskill']
                     elif player['magic']: skillmult += player['magicskill']
                     basedamage = ((luck_roll / 100) + 1) * player['weapondamage'] * skillmult
+
                     if player['damage'] != 0 and not player['ranged'] and not player['magic']: basedamage += player['damage']
                     basedamage = round(basedamage, 1)
                     enemy['hp'] -= basedamage
@@ -94,11 +101,14 @@ def combat(enemy, weapon_drop):
                     time.sleep(0.6)
                     input("\n\nCONTINUE")
 
+
+
+
                     if enemy['hp'] != 0:
                         clear_screen()
                         ranaway = 0
                         caught = 0
-                        luck = enemy['luck'] * (1 - player['luckproof'] / 100)
+                        luck = weapon_drop['wluck'] * (1 - player['luckproof'] / 100)
                         ehealth = enemy['hp']
                         confidence = enemy['confidence']
                         waittime = random.uniform(1, 3)
@@ -123,19 +133,34 @@ def combat(enemy, weapon_drop):
                                     print("You let the enemy go.")
                                 input("\n\nCONTINUE")
 
-                        if enemy['hp'] != 0 and ranaway == 0:
+
+
+
+                        if enemy['hp'] != 0 and ranaway == 0 and caught == 0:
                             luck_roll = round(random.uniform(-luck, luck), 1)
-                            edamage = enemy['damage'] * ((luck_roll / 100) + 1)
+                            edamage = weapon_drop['damage'] * ((luck_roll / 100) + 1)
+
+
                             if not weapon_drop['ranged'] and not weapon_drop['magic']:
                                 edamage *= (1 - player['swordres'] / 100)
                             elif weapon_drop['magic']:
+                            
                                 edamage *= (1 - player['magicres'] / 100)
 
+
+                            battack = enemy['attack']
+                            luck = enemy['luck'] * (1 - player['luckproof'] / 100)
+                            luck_roll = round(random.uniform(-luck, luck), 1)
+                            battack = battack * ((luck_roll / 100) + 1)
+                            battack = round(battack, 1)
+
+                            battack *= (1 - player['protection'] / 200)
                             edamage *= (1 - player['protection'] / 200)
                             edamage = round(edamage, 1)
-                            player['health'] -= edamage
+                            totaldamage = round((edamage + battack), 1)
+                            player['health'] -= totaldamage
                             player['health'] = round(player['health'], 1)
-                            print(f"\nThe {enemy['name']} attacks! Luck-adjusted damage: {edamage}. You have {player['health']} HP left.")
+                            print(f"\nThe {enemy['name']} attacks! He does {battack} via strength and {edamage} damage via his weapon (Total {totaldamage}). You have {player['health']} HP left.")
                             input("\n\nCONTINUE")
 
                     if enemy['hp'] == 0:
@@ -165,6 +190,8 @@ def combat(enemy, weapon_drop):
                             print(f"You also found: {w['name']}!")
                         input("\n\nCONTINUE")
 
+
+
         elif choice == "2":
             clear_screen()
             has_potions = False
@@ -190,6 +217,8 @@ def combat(enemy, weapon_drop):
                 print("Mana restored.")
                 inventory["manapot"] -= 1
             input("\n\nCONTINUE")
+
+
 
         elif choice == "3":
             clear_screen()

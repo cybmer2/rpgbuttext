@@ -73,7 +73,6 @@ def txt1():
     input("\n")
     clear_screen()
     print(center_text("\033[1mShe gave you raggy clothes!\033[0m"))
-    player["armour"] = "raggy"
     input("\n\n\n")
     clear_screen()
     print("Strange Woman: Oh!")
@@ -157,3 +156,39 @@ def txt1():
 
 
 
+def txt2():
+    print(center_text("\033[1mThis place looks interesting...\033[0m"))
+    input("\n\n\n\n")
+    clear_screen()
+    print(center_text("\033[1mLet me go inside...\033[0m"))
+    input("\n\n\n\n")
+    clear_screen()
+    print(center_text("*You go inside*"))
+    input("\n\n\n\n")
+    clear_screen()
+    print(center_text("\033[1m*You see a green glow*\033[0m"))
+    input("\n\n\n\n")
+    clear_screen()
+    print(center_text("\033[1mI wanna see what that is.\033[0m"))
+    input("\n\n\n\n")
+    clear_screen()
+    print(center_text("\033[1mA goblin jumps out and attacks you!\033[0m"))
+    input("\n\n\n\n")
+    clear_screen()
+
+def txt3():
+    print(center_text("\033[1mPhew.. that was scary.\033[0m"))
+    input("\n\n\n\n")
+    clear_screen()
+    print(center_text("\033[1m...\033[0m"))
+    input("\n\n\n\n")
+    clear_screen()
+    print(center_text("\033[1mHey, this goblin dropped some cool brass knuckles though!\033[0m"))
+    input("\n\n\n\n")
+    clear_screen()
+    print(center_text("\033[1mFun!\033[0m"))
+    input("\n\n\n\n")
+    clear_screen()
+    print(center_text("\033[1mWait- what's that?\033[0m"))
+    time.sleep(1.5)
+    clear_screen()

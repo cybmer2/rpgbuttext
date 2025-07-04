@@ -1,6 +1,6 @@
 from game_data import player, inventory, weapons, enemy_templates, misc, armours
 from combat import combat, clear_screen, genenemy, geneweap
-from text import txt1, center_text
+from text import *
 import random
 import time
 import os
@@ -157,6 +157,8 @@ def main():
                     print(f"Protection: {selected_armour['protection']}, Luckproof: {selected_armour['luckproof']}, Sword Resistance: {selected_armour['swordres']}, Magic Resistance: {selected_armour['magicres']}")
                     input("\n\nCONTINUE")
                    
+                   
+
             if choice == "4":
                 clear_screen()
                 print("=== SUICIDE ===")
@@ -190,10 +192,12 @@ def main():
         
         if misc["location"] == "Cave":
             if misc["cavevisits"] == 0:
-                clear_screen()
-                combat(genenemy("Goblin", 25, 5, 5, 25, 2.2, 15),geneweap("Goblin Brass Knuckles", 40, 6, 30, False, False, 70))
                 misc["cavevisists"] = 1
-                
+                clear_screen()
+                txt2()
+                combat(genenemy("Goblin", 10, 2, 5, 25, 2.2, 15),geneweap("Goblin Brass Knuckles", 40, 2, 30, False, False, 100))
+                txt3()
+            combat(genenemy("Bigger Goblin", 25, 2, 5, 25, 2.2, 15),geneweap("Goblin Dagger", 70, 10, 100, False, False, 100))
             clear_screen()
             print("=== Cave ===")
             
