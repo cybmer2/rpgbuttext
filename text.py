@@ -253,7 +253,7 @@ def txt6():
 
 def txt7():
     clear_screen()
-    center_text(print("Dojo Master: Bring me your two favourite door handles then we'll talk."))
+    print(center_text("Dojo Master: Bring me your two favourite door handles then we'll talk."))
     input("\n\n\n")
     clear_screen()
     
@@ -269,3 +269,6 @@ def txt8():
     print(f"Dojo Master: I see you have done as I have asked.")
     print(f"Dojo Master: You can keep the door handles. I don't care for them. It was a test to see if you'd do something completely random for the craft.")
     print(f"Dojo Master: Now. Let me show you the power of Jkradan")
+    input("\n\n\n")
+    clear_screen()
+    misc["magicunlocked"] = True

@@ -27,14 +27,14 @@ enemy_weapons = [
 ]
 
 spells = [
-    {"name": "Fireball", "Obtained": False, "Mana": 15, "Cost": 50}
-    {"name": "Healing", "Obtained": False, "Mana": 30, "Cost": 200}
-    {"name": "Domain Expansion", "Obtained": False, "Mana": 2500, "Cost": 7500}
-    {"name": "Spin", "Obtained": False, "Mana": 5, "Cost": 400}
-    {"name": "Double Swipe", "Obtained": False, "Mana": 50, "Cost": 500}
-    {"name": "Freeze", "Obtained": False, "Mana": 100, "Cost": 1200}
-    {"name": "Double Spell", "Obtained": False, "Mana": 200, "Cost": 1000}
-    {"name": "Tripple Spell", "Obtained": False, "Mana": 500, "Cost": 4000}
+    {"name": "Fireball", "Obtained": False, "Mana": 15, "Cost": 50},
+    {"name": "Healing", "Obtained": False, "Mana": 30, "Cost": 200},
+    {"name": "Domain Expansion", "Obtained": False, "Mana": 2500, "Cost": 7500},
+    {"name": "Spin", "Obtained": False, "Mana": 5, "Cost": 400},
+    {"name": "Double Swipe", "Obtained": False, "Mana": 50, "Cost": 500},
+    {"name": "Freeze", "Obtained": False, "Mana": 100, "Cost": 1200},
+    {"name": "Double Spell", "Obtained": False, "Mana": 200, "Cost": 1000},
+    {"name": "Tripple Spell", "Obtained": False, "Mana": 500, "Cost": 4000},
 
 
 ]
@@ -71,7 +71,7 @@ player = {
     #general
 
     "gold": 0,
-    "xp": 0,
+    "xp": 1500,
 
 
     #weapon

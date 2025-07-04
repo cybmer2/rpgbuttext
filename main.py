@@ -222,22 +222,45 @@ def main():
                 else:
                     if misc["doorhandles"] != 2:
                         txt7()
-                    else:
+
+                    elif misc["magicunlocked"] == False:
                         txt8()
                         misc["magicunlocked"] = True
 
-
-                if misc["magiunlocked"] == True:
+                if misc["magicunlocked"] == True:
+                    clear_screen()
                     print("=== Magic Technique \"Store\" ===")
                     print("What would you like to learn?")
-                    print("\n\n")
+                    print("\n")
                     print(f"Your available XP {player["xp"]}")
                     available_spells = [spell for spell in spells if not spell["Obtained"]]
                     if not available_spells: 
                         print("You own all the spells!")
                         break
                     print("Available spells to buy:")
-                    #for i
+                    for i, spell in enumerate(available_spells):
+                        print(f"{i + 1}. {spell['name']} (Mana: {spell['Mana']}, Cost: {spell['Cost']} XP)")
+                    choice = input("\nEnter spell number to buy.\n> ").strip()
+
+                    if not choice.isdigit() or not (1 <= int(choice) <= len(available_spells)):
+                        print("Invalid.")
+                        continue
+
+                    selected_spell = available_spells[int(choice) - 1]
+
+                    if player["xp"] >= selected_spell["Cost"]:
+                        player["xp"] -= selected_spell["Cost"]
+                        selected_spell["Obtained"] = True
+                        print(f"You bought {selected_spell['name']}")
+                    else:
+                        clear_screen()
+                        print("Not enough XP.")
+                        input("\n\n")
+
+
+
+            if choice == "2":
+                misc["doorhandles"] = 2
 
 
 
