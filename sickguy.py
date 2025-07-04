@@ -5,7 +5,7 @@ import os
 
 player = {
     "name": "bob",
-    "health": 100,
+    "health": 80,
     "max_health": 100,
     "damage": 1.5,
     "speed": 20,
@@ -79,7 +79,7 @@ def combat(enemy):
         print("3. Switch weapon")
         print("4. Run")
 
-        choice = input("> ")
+        choice = input("\n> ")
 
 
         if choice == "1" and player["weapondurability"] >= 1 or player["weapondurability"] == False:
@@ -227,8 +227,10 @@ def combat(enemy):
 
                 if enemy['hp'] == 0:
                     clear_screen()
-                    gold_drop = int(enemy['dropgold'] * random.uniform(0.9, 1.1))
-                    xp_drop = int(enemy['dropxp'] * random.uniform(0.9, 1.1))
+                    gold_drop = enemy['dropgold'] * random.uniform(0.9, 1.1)
+                    gold_drop = round(gold_drop, 1)
+                    xp_drop = enemy['dropxp'] * random.uniform(0.9, 1.1)
+                    xp_drop = round(xp_drop, 1)
                     print(f"You killed a {enemy['name']}! It dropped {gold_drop} gold and {xp_drop} experience!")
                     player["xp"] += xp_drop
                     player["gold"] += gold_drop
@@ -273,17 +275,19 @@ def combat(enemy):
 
             if choice3 == "2" and l1hpot > 0:
                 clear_screen()
-                print("Drinking this will heal you by 15 health.")
+                print("Drinking this will heal you between 10 to 15 health.")
                 print(f"Current health: {player['health']}, Max Health: {player['max_health']}")
                 print("\n\nDo you wish to consume it? (Will NOT use a turn.) Y/N")
                 choice2 = input("> ")
                 if choice2.lower() in ["y", "yes"]:
                     clear_screen()
                     inventory['l1healpot'] -= 1
-                    player['health'] += 15
+                    randomheal = random.uniform(10, 15)
+                    randomheal = round(randomheal, 1)
+                    player['health'] += randomheal
                     if player["max_health"] < player["health"]:
                         player["health"] = player["max_health"]
-                    print(f"Your new health is {player['health']}.")
+                    print(f"Your new health is {player['health']}")
                     time.sleep(0.6)
                     input("\n\nCONTINUE")
             elif choice3 == "2":
@@ -371,9 +375,23 @@ def combat(enemy):
 
 
 def main():
-    print("==== WELCOME! ===")
-    time.sleep(1)
-    print("\nWhat's your name?")
-    player["name"] = input("> ")
-    combat(enemy_templates[0])
+    while True:
+        clear_screen()
+        print("=== Main Menu ===")
+        print("\n\n\nWhat would you like to do?")
+        print("\n1. Load a save.")
+        print("2. Explore")
+        print("3. Settings")
+
+
+
+
+
+
+
+
+print("==== WELCOME! ===")
+time.sleep(1)
+print("\nWhat's your name?")
+player["name"] = input("> ")
 main()
