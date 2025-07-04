@@ -5,7 +5,9 @@ import os
 
 inventory = {
     "bandaid": 0,
-    "l1healpot": 0,
+    "healpot": 0,
+    "strengthpot": 0,
+    "manapot": 0,
     "arrow": 0,
 
 }
@@ -18,6 +20,7 @@ weapons = [
     {"name": "Bow", "Luck": 60, "Damage": 20, "Durability": 80, "Obtained": True, "Ranged": True, "Magic": False},
     {"name": "Katana", "Luck": 40, "Damage": 30, "Durability": 400, "Obtained": False, "Ranged": False, "Magic": False},
     {"name": "Firestaff", "Luck": 0, "Damage": 30, "Durability": 400, "Obtained": True, "Ranged": False, "Magic": True},
+    {"name": "Wooden Staff", "Luck": 30, "Damage": 5, "Durability": 150, "Obtained": True, "Ranged": False, "Magic": True},
 ]
 
 
@@ -35,8 +38,9 @@ spells = [
     {"name": "Freeze", "Obtained": False, "Mana": 100, "Cost": 1200},
     {"name": "Double Spell", "Obtained": False, "Mana": 200, "Cost": 1000},
     {"name": "Tripple Spell", "Obtained": False, "Mana": 500, "Cost": 4000},
-
-
+    {"name": "Potion enhance", "Obtained": False, "Mana": 50, "Cost": 300},
+    {"name": "Mana Trickery", "Obtained": False, "Mana": 0, "Cost": 2500},
+    {"name": "Strong Arm", "Obtained": False, "Mana": 100, "Cost": 100},
 ]
 
 enemy_templates = [
