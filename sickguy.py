@@ -5,7 +5,7 @@ import os
 
 player = {
     "name": "bob",
-    "health": 80,
+    "health": 100,
     "max_health": 100,
     "damage": 2,
     "speed": 20,
@@ -14,6 +14,8 @@ player = {
     "weapon": "Iron Sword",
     "weapondamage": 6,
     "weaponluck": 25,
+    "weapondurability": 25,
+    "magic": False,
     "speed": 100,
     "ranged": False
     
@@ -28,14 +30,14 @@ inventory = {
 
 }
 
-weapons = {
-    "fists": True,
-    "ironsword": True,
-    "bow": True,
-    "Katana": False,
-    "Firebow": False,
-    
-}
+weapons = [
+    {"name": "Fists", "Luck": 60, "Damage": 2, "Durability": False, "Obtained": True, "Ranged": False, "Magic": False},
+    {"name": "Iron sword", "Luck": 25, "Damage": 6, "Durability": 25, "Obtained": True, "Ranged": False, "Magic": False},
+    {"name": "Bow", "Luck": 60, "Damage": 20, "Durability": 80, "Obtained": True, "Ranged": True, "Magic": False},
+    {"name": "Katana", "Luck": 40, "Damage": 30, "Durability": 400, "Obtained": False, "Ranged": False, "Magic": False},
+    {"name": "Firestaff", "Luck": 0, "Damage": 30, "Durability": 400, "Obtained": False, "Ranged": False, "Magic": True}
+]
+
 
 
 magic = False
@@ -80,7 +82,7 @@ def combat(enemy):
 
         if choice == "1":
             clear_screen()
-            print(f"You are wielding an iron sword.\nDamage: {player['weapondamage']}\nLuck: ±{player['weaponluck']}%")
+            print(f"You are wielding: {player['weapon']}.\nDamage: {player['weapondamage']}\nLuck: ±{player['weaponluck']}%")
             print("Attack? Y/N")
             attackinp = input("> ")
             luck = player["weaponluck"]
@@ -206,12 +208,12 @@ def combat(enemy):
 
 
         if choice == "2":
-            if magic == True:
+            if player['magic'] == True:
                 choice2 = input("Would you like to do magic or heal?\n > ")
             else:
                 choice2 = "y"
         
-        if choice2.lower() in ["y", "yes"]:
+        if choice == "2" and choice2.lower() in ["y", "yes"]:
             clear_screen()
             print(f"{inventory['bandaid']} - BANDAIDS (1)")
             print(f"{inventory['l1healpot']} - HEALING POTIONS (2)")
@@ -230,7 +232,7 @@ def combat(enemy):
                     player['health'] += 5
                     if player["max_health"] < player["health"]:
                         player["health"] = player["max_health"]
-                    print(f"Your new health is {player["health"]}.")
+                    print(f"Your new health is {player['health']}.")
                     time.sleep(0.6)
                     input("\n\nCONTINUE")
             elif choice3 == "1":
@@ -238,7 +240,6 @@ def combat(enemy):
                 print("You do not have any bandaids to apply.")
                 time.sleep(0.6)
                 input("\n\nCONTINUE")
-
 
             if choice3 == "2" and l1hpot > 0:
                 clear_screen()
@@ -252,22 +253,56 @@ def combat(enemy):
                     player['health'] += 15
                     if player["max_health"] < player["health"]:
                         player["health"] = player["max_health"]
-                    print(f"Your new health is {player["health"]}.")
+                    print(f"Your new health is {player['health']}.")
                     time.sleep(0.6)
                     input("\n\nCONTINUE")
-            elif choice3 == "1":
+            elif choice3 == "2":
                 clear_screen()
                 print("You do not have any health potions to consume.")
                 time.sleep(0.6)
                 input("\n\nCONTINUE")
 
 
-        if choice2 == "3":
+
+
+        if choice == "3":
             clear_screen()
             print("===AVAILABLE WEAPONS===\n\n\n")
-            index = 0
-            print("")
+            obtained_weapons = [w for w in weapons if w["Obtained"]]
+            for idx, weapon in enumerate(obtained_weapons, 1):
+                print(f"{idx}. {weapon['name']} (Damage: {weapon['Damage']}, Luck: {weapon['Luck']})")
+            choice = input("\n\nChoose a weapon.\n> ")
+            selected_weapon = None
+            if choice.isdigit():
+                index = int(choice) - 1
+                if 0 <= index < len(obtained_weapons):
+                    selected_weapon = obtained_weapons[index]
+                else:
+                    clear_screen()
+                    print("Invalid choice. Defaulting to Fists.")
+                    time.wait(2)
+            else:
+                clear_screen()
+                print("Invalid input. Defaulting to Fists.")
+                time.wait(2)
+            if not selected_weapon:
+                selected_weapon = next(w for w in weapons if w["name"] == "Fists")
+            player["weapon"] = selected_weapon["name"]
+            player["weapondamage"] = selected_weapon["Damage"]
+            player["weaponluck"] = selected_weapon["Luck"]
+            player["weapondurability"] = selected_weapon["Durability"]
+            player["ranged"] = selected_weapon["Ranged"]
+            player["magic"] = selected_weapon["Magic"]
 
+            clear_screen()
+            print(f"You selected: {selected_weapon['name']}")
+            print(f"Damage: {selected_weapon['Damage']}, Luck: {selected_weapon['Luck']}, Durability: {selected_weapon['Durability']}")
+            input("\n\nCONTINUE")
+
+
+
+
+        
 
 
 
