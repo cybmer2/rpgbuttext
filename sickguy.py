@@ -1,5 +1,7 @@
 import random
 import time
+import os
+
 
 player = {
     "name": "bob",
@@ -10,7 +12,8 @@ player = {
     "gold": 50,
     "potions": 0,
     "weapon": "Iron Sword",
-    "weapondamage": 6
+    "weapondamage": 6,
+    "weaponluck": 25
 
     
 }
@@ -24,14 +27,26 @@ enemy_templates = [
 ]
 
 
+
+def clear_screen():
+    if os.name == 'nt':  # Windows
+        os.system('cls')
+    else:  # macOS/Linux
+        os.system('clear')
+
+
+
+
 def combat(enemy):
-    print(f"\nA wild {enemy['name']} appears!")
 
     while enemy["hp"] > 0 and player["health"] > 0:
-        print("\n===FIGHT===")
+        clear_screen()
+        print("===FIGHT===")
+
+        print(f"\nYou are fighting a {enemy['name']}.")
         print(f'\n"{player["name"]}" HP: {player["health"]}')
         print(f"{enemy['name']} HP: {enemy['hp']}")
-        print("1. Attack")
+        print("\n\n1. Attack")
         print("2. Magic / Healing")
         print("3. Switch weapon")
         print("4. Run")
@@ -40,12 +55,45 @@ def combat(enemy):
 
 
         if choice == "1":
-            print(f"\nYou are wielding an iron sword. Damage: {player['weapondamage']}")
+            clear_screen()
+            print(f"You are wielding an iron sword.\nDamage: {player['weapondamage']}\nLuck: ±{player['weaponluck']}%")
             print("Attack? Y/N")
             attackinp = input("> ")
-
+            luck = player["weaponluck"]
             if attackinp.lower() in ["y", "yes"]:
-                print("e")
+                #attack
+
+
+                luck_roll = random.randint(-luck, luck)
+                if luck != 0:
+                    if luck_roll == luck:
+                        print(f"You got insanely lucky! (+{luck_roll}%)")
+                    elif luck_roll >= 0.75 * luck:
+                        print(f"You got very lucky! (+{luck_roll}%)")
+                    elif luck_roll >= 0.5 * luck:
+                        print(f"You got lucky. (+{luck_roll}%)")
+                    elif luck_roll >= 0:
+                        print(f"You got mediocrely lucky. (+{luck_roll}%)")
+                    elif luck_roll == -luck:
+                        print(f"You got insanely unlucky! ({luck_roll}%)")
+                    elif luck_roll <= -0.75 * luck:
+                        print(f"You got very unlucky. ({luck_roll}%)")
+                    elif luck_roll <= -0.5 * luck:
+                        print(f"You got unlucky. ({luck_roll}%)")
+                    else:
+                        print(f"You got mediocrely unlucky. ({luck_roll}%)")
+                
+                if player["damage"] == 0:
+                    clear_screen()
+                    damage = ((luck_roll / 100) +1) * player["weapondamage"]
+                    enemy["hp"] -= damage
+                    round(enemy["hp"], 1)
+                    print(f"You did {damage} damage!\nThe {enemy['name']} has {enemy['hp']} remaining!")
+                    
+
+
+
+
 
 def main():
     print("==== WELCOME! ===")
