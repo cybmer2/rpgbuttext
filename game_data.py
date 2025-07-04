@@ -17,7 +17,7 @@ weapons = [
     {"name": "Iron sword", "Luck": 25, "Damage": 6, "Durability": 25, "Obtained": True, "Ranged": False, "Magic": False},
     {"name": "Bow", "Luck": 60, "Damage": 20, "Durability": 80, "Obtained": True, "Ranged": True, "Magic": False},
     {"name": "Katana", "Luck": 40, "Damage": 30, "Durability": 400, "Obtained": False, "Ranged": False, "Magic": False},
-    {"name": "Firestaff", "Luck": 0, "Damage": 30, "Durability": 400, "Obtained": False, "Ranged": False, "Magic": True},
+    {"name": "Firestaff", "Luck": 0, "Damage": 30, "Durability": 400, "Obtained": True, "Ranged": False, "Magic": True},
 ]
 
 
@@ -37,7 +37,7 @@ enemy_templates = [
 
 armours = [
 
-    {"name": "Naked", "protection": 0, "luckproof": 100, "swordres": 0, "magicres": 0, "Obtained": True},
+    {"name": "Naked", "protection": 0, "luckproof": 40, "swordres": 0, "magicres": 0, "Obtained": True},
     {"name": "Raggy clothes", "protection": 5, "luckproof": 0, "swordres": 0, "magicres": 0, "Obtained": True},
 
 ]
@@ -75,7 +75,7 @@ player = {
 
     "armour": "Naked",
     "protection": 0,
-    "luckproof": 100,
+    "luckproof": 40,
     "swordres": 0,
     "magicres": 0
 

@@ -191,11 +191,9 @@ def main():
         if misc["location"] == "Cave":
             if misc["cavevisits"] == 0:
                 clear_screen()
-                #txt2()
-                combat(genenemy("Goblin", 10, 5, 3, 20, 2.2, 15),geneweap("Goblin Brass Knuckles", 40, 6, 30, False, False, 70))
-                #txt3()ch
-                time.sleep(2)
-                combat(genenemy("Goblin", 25, 5, 5, 25, 2.2, 15))
+                combat(genenemy("Goblin", 25, 5, 5, 25, 2.2, 15),geneweap("Goblin Brass Knuckles", 40, 6, 30, False, False, 70))
+                misc["cavevisists"] = 1
+                
             clear_screen()
             print("=== Cave ===")
             
