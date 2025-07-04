@@ -34,8 +34,8 @@ enemy_templates = [
 
 armours = [
 
-    {"name": "naked", "protection": 0, "fireres": 0, "luckproof": 100, "slashres": 0, "magicres": 0,}
-    {"name": "raggy", "protection", 5, "fireres:" -20, "luckproof": 0, "slashres": 0, "magicres": 0,}
+    {"name": "Naked", "protection": 0, "luckproof": 100, "swordres": 0, "magicres": 0,},
+    {"name": "Raggy clothes", "protection": 5, "luckproof": 0, "swordres": 0, "magicres": 0,},
 
 ]
 
@@ -43,17 +43,19 @@ armours = [
 player = {
     "name": "bob",
 
-    #basic stats
+    #skills & stats
 
     "health": 100,
     "max_health": 100,
-    "damage": 1,
     "speed": 100,
+
+    "swordskill": 0, #max 10
+    "magicskill": 0, #max 10
+    "damage": 1, #raw strength
 
     #general
 
     "gold": 0,
-    "potions": 0,
     "xp": 0,
 
 
@@ -64,13 +66,17 @@ player = {
     "weaponluck": 60,
     "weapondurability": False,
     "magic": False,
-    "speed": 100,
     "ranged": False,
 
     #armour
 
-    "armour": "naked",
+    "armour": "Naked",
     "protection": 0,
+    "luckproof": 100,
+    "swordres": 0,
+    "magicres": 0
+
+
     
 }
 

@@ -72,7 +72,7 @@ def txt1():
     print("Strange Woman: Here you go!")
     input("\n")
     clear_screen()
-    print(center_text("\033[1mYou equipped raggy clothes!\033[0m"))
+    print(center_text("\033[1mShe gave you raggy clothes!\033[0m"))
     player["armour"] = "raggy"
     input("\n\n\n")
     clear_screen()
