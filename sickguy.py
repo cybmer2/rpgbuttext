@@ -50,6 +50,7 @@ enemy_templates = [
     {"name": "Goblin", "hp": 10, "dropgold": 5, "attack": 3, "luck": 1000, "confidence": 2.2, "dropxp": 15},
     {"name": "Golem", "hp": 40, "dropgold": 20, "attack": 5, "luck": 5, "confidence": 4, "dropxp": 50},
     {"name": "Skeleton", "hp": 15, "dropgold": 10, "attack": 5, "luck": 15, "confidence": 1.5, "dropxp": 10},
+    {"name": "Dragon", "hp": 2500, "dropgold": 300000, "attack": 300, "luck": 65, "confidence": 9.4, "dropxp": 250000}
 ]
 
 
@@ -193,21 +194,12 @@ def combat(enemy):
                                 time.sleep(0.6)
                                 input("\n\nCONTINUE")
 
-
-
-                else:
-                    clear_screen()
-                    print(f"You killed a {enemy['name']}! It dropped {enemy['dropgold']} gold and {enemy['dropxp']} experience!")
-                    player["xp"] += enemy['dropxp']
-                    player["gold"] += enemy['dropgold']
-                    input("\n\nCONTINUE")
                 
 
 
 
                     if enemy['hp'] != 0:
-
-                        if luck != 0 and ranaway == 0 and caught == 0 and ehealth > 0:
+                        if luck != 0 and ranaway == 0 and caught == 0:
                             dontsayluck = 0
                             luck_roll = random.uniform(-luck, luck)
                             luck_roll = (enemy['attack'] * ((luck_roll / 100) + 1)) - enemy['attack']
@@ -231,6 +223,17 @@ def combat(enemy):
                             print(f"\nYou took {damage} damage! You have {player['health']} health left.")
                             time.sleep(0.6)
                             input("\n\nCONTINUE")
+
+
+                if enemy['hp'] == 0:
+                    clear_screen()
+                    gold_drop = int(enemy['dropgold'] * random.uniform(0.9, 1.1))
+                    xp_drop = int(enemy['dropxp'] * random.uniform(0.9, 1.1))
+                    print(f"You killed a {enemy['name']}! It dropped {gold_drop} gold and {xp_drop} experience!")
+                    player["xp"] += xp_drop
+                    player["gold"] += gold_drop
+                    input("\n\nCONTINUE")
+
 
 
 
@@ -329,7 +332,16 @@ def combat(enemy):
         if choice == "4":
             clear_screen()
             print("=== RUN AWAY ===")
-            print(f"\n\nAre you sure you want to run away? You have {player['health']} health.")
+            print(f"\n\nYou will lose {(player['health'] * 0.15) + (enemy['hp'] * 0.40):.1f} health, "
+      f"and have {max(player['health'] - ((player['health'] * 0.15) + (enemy['hp'] * 0.40)), 0):.1f} remaining.")
+            print("\n\nAre you sure you want to run away? Y/N")
+            choice2 = input("> ")
+            if choice2.lower() in ["y", "yes"]:
+                player['health'] = max(player['health'] - (player['health'] * 0.15 + enemy['hp'] * 0.40), 0)
+                ranaway = 1
+
+
+            
 
 
 
