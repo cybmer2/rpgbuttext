@@ -46,7 +46,7 @@ magic = False
 #
 
 enemy_templates = [
-    {"name": "Goblin", "hp": 10, "dropgold": 5, "attack": 3, "luck": 10, "confidence": 2.2,},
+    {"name": "Goblin", "hp": 10, "dropgold": 5, "attack": 3, "luck": 1000, "confidence": 2.2,},
     {"name": "Golem", "hp": 40, "dropgold": 20, "attack": 5, "luck": 5, "confidence": 4 ,},
     {"name": "Skeleton", "hp": 15, "dropgold": 10, "attack": 5, "luck": 15, "confidence": 2,},
 ]
@@ -124,9 +124,13 @@ def combat(enemy):
                     damage = round(damage, 1)
                     enemy["hp"] -= damage
                     enemy["hp"] = round(enemy["hp"], 1)
+                    if enemy['hp'] <= 0:
+                        enemy['hp'] = 0
                     print(f"\nYour raw strength added {player['damage']} damage! (Not luck affected.)\nIn total you did {damage} damage!\nThe {enemy['name']} has {enemy['hp']} health remaining!")
                     time.sleep(0.6)
                     input("\n\nCONTINUE")
+
+                if()
                     
 
 
@@ -140,14 +144,14 @@ def combat(enemy):
                 caught = 0
                 luck = enemy['luck']
                 ehealth = enemy['hp']
-                damage = enemy['luck']
+                damage = enemy['attack']
                 player_health = player['health']
                 player_maxhp = player['max_health']
                 confidence = enemy['confidence']
                 waittime = random.uniform(1, 3)
                 print(f"The {enemy['name']} is deciding what to do...")
                 time.sleep(waittime)
-                if ehealth < 0.5 * emaxhealth and player_health > 0.6 * player_maxhp:
+                if ehealth < 0.5 * emaxhealth and player_health > 0.6 * player_maxhp and ehealth > 0:
                     health_ratio = ehealth / emaxhealth
                     run_chance = 1 - health_ratio
                     confidence_factor = confidence / 10.0
@@ -187,16 +191,23 @@ def combat(enemy):
 
 
 
-                if luck != 0 and ranaway == 0 and caught == 0:
+                if luck != 0 and ranaway == 0 and caught == 0 and ehealth > 0:
+                    dontsayluck = 0
                     luck_roll = random.uniform(-luck, luck)
+                    luck_roll = (enemy['attack'] * ((luck_roll / 100) + 1)) - enemy['attack']
                     luck_roll = round(luck_roll, 1)
-                    if luck_roll > 0:
+                    if enemy['attack'] + luck_roll < 0:
+                        luck_roll = (enemy['attack'] * -1)
+                        dontsayluck = 1
+                    if luck_roll > 0 and dontsayluck == 0:
                         print(f"Your enemy acquires {luck_roll} extra damage through luck.")
-                    if luck_roll < 0:
+                    if luck_roll < 0 and dontsayluck == 0:
                         print(f"Your enemy looses {luck_roll} damage through luck.")
-                    if luck_roll == 0:
+                    if luck_roll == 0 and dontsayluck == 0:
                         print("Your enemies luck damage stays unchanged!")
-                if ranaway == 0 and caught == 0:
+                    if dontsayluck == 1:
+                        print("Your enemy lost all of its damage due to luck!")
+                if ranaway == 0 and caught == 0 and ehealth > 0:
                     damage = luck_roll + enemy['attack']
                     damage = round(damage, 1)
                     player['health'] -= damage
