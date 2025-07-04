@@ -5,10 +5,8 @@ import os
 
 inventory = {
     "bandaid": 0,
-    "l1healpot": 2,
-    "bow": 1,
-    "ironsword": 1,
-    "arrow": 15,
+    "l1healpot": 0,
+    "arrow": 0,
 
 }
 
@@ -34,30 +32,52 @@ enemy_templates = [
 ]
 
 
+armours = [
+
+    {"name": "naked", "protection": 0, "fireres": 0, "luckproof": 100, "slashres": 0, "magicres": 0,}
+    {"name": "raggy", "protection", 5, "fireres:" -20, "luckproof": 0, "slashres": 0, "magicres": 0,}
+
+]
+
+
 player = {
     "name": "bob",
-    "health": 80,
+
+    #basic stats
+
+    "health": 100,
     "max_health": 100,
-    "damage": 1.5,
-    "speed": 20,
-    "gold": 250,
+    "damage": 1,
+    "speed": 100,
+
+    #general
+
+    "gold": 0,
     "potions": 0,
-    "weapon": "Iron Sword",
-    "weapondamage": 6,
-    "weaponluck": 25,
-    "weapondurability": 25,
+    "xp": 0,
+
+
+    #weapon
+
+    "weapon": "Fists",
+    "weapondamage": 2,
+    "weaponluck": 60,
+    "weapondurability": False,
     "magic": False,
     "speed": 100,
     "ranged": False,
-    "xp": 0,
+
+    #armour
+
     "armour": "naked",
+    "protection": 0,
     
 }
 
 misc = {
 
-    "location": "Main Menu"
-
+    "location": "x",
+    "lastlocation": "x",
 
 
 }

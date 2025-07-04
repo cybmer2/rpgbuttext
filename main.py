@@ -31,8 +31,25 @@ def main():
             clear_screen()
             print("=== Village ===")
             print("What would you like to do?")
-            print("\n\n1. Go to the shop\n2. Go to the mineshafts\n3. Explore")
-            input("\n> ")
+            print("\n\n1. Go to the shop\n2. Go to the mineshafts\n3. Explore\n4. Other")
+            choice == input("\n> ")
+            if choice == "4":
+                misc["location"] = "Other"
+                misc["lastlocation"] = "Village"
+
+
+        if misc["location"] == "Other":
+            clear_screen()
+            print("=== Misc ===")
+            print("What would you like to do?")
+            print("\n1. Save my game.\n2. Check my stats.\n3. Check my inventory.\n4. Commit suicide\n5. Eat / Heal\n6. Go back")
+            if choice == "6":
+                misc["location"] = misc["lastlocation"]
+            if choice == "2":
+                clear_screen()
+                
+            
+            
 
 
 
