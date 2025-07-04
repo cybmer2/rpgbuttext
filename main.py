@@ -1,4 +1,4 @@
-from game_data import player, inventory, weapons, enemy_templates, misc, armours
+from game_data import player, inventory, weapons, enemy_templates, misc, armours, spells
 from combat import combat, clear_screen, genenemy, geneweap
 from text import *
 import random
@@ -194,14 +194,62 @@ def main():
             if choice == "1":
                 misc["lastlocation"] = misc["location"]
                 misc["location"] = "Cave"
+            if choice == "4":
+                misc["lastlocation"] = "village"
+                misc["location"] = "dojo"
+
+
+        
 
 
 
+        if misc["location"].lower() == "dojo":
+            if misc["dojovisit"] == "no":
+                txt5()
+                misc["dojovisit"] = "yes"
+            clear_screen()
+            print("=== Dojo ====")
+            print("What would you like to do?")
+            if misc["magicunlocked"] == False:
+                print("\n\n1. Inquire about unlocking magic\n2. Ask to be trained in the art of swordsmanship\n3. Spend time working agility \n4. Spend time working on your strength\n5. Leave")
+            if misc["magicunlocked"] == True:
+                print("\n\n1. Ask to be trained in magic\n2. Ask to be trained in the art of swordsmanship\n3. Spend time working agility \n4. Spend time working on your strength\n5. Leave")
+            choice = input("\n> ")
+            if choice == "1":
+                if misc["magicasked"] == False and misc["magicunlocked"] == False:
+                    txt6()
+                    misc["magicasked"] = True
+                else:
+                    if misc["doorhandles"] != 2:
+                        txt7()
+                    else:
+                        txt8()
+                        misc["magicunlocked"] = True
+
+
+                if misc["magiunlocked"] == True:
+                    print("=== Magic Technique \"Store\" ===")
+                    print("What would you like to learn?")
+                    print("\n\n")
+                    print(f"Your available XP {player["xp"]}")
+                    available_spells = [spell for spell in spells if not spell["Obtained"]]
+                    if not available_spells: 
+                        print("You own all the spells!")
+                        break
+                    print("Available spells to buy:")
+                    #for i
 
 
 
+                    
+                
+
+                
+            
 
 
+                
+        
         
         if misc["location"].lower() == "cave":
             if misc["cavevisits"] == 0:
