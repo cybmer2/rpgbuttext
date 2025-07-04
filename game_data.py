@@ -78,13 +78,11 @@ player = {
     "luckproof": 40,
     "swordres": 0,
     "magicres": 0
-
-
-    
 }
 
-misc = {
-
+    
+misc ={
+ 
     "location": "x",
     "lastlocation": "x",
     "cavevisits": 0,

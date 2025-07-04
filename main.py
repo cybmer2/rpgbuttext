@@ -40,7 +40,7 @@ def main():
                 misc["lastlocation"] = "Village"
 
 
-        if misc["location"] == "Other":
+        if misc["location"].lower() == "other":
             clear_screen()
             print("=== Misc ===")
             print("What would you like to do?")
@@ -156,9 +156,6 @@ def main():
                     print(f"You equipped: {selected_armour['name']}")
                     print(f"Protection: {selected_armour['protection']}, Luckproof: {selected_armour['luckproof']}, Sword Resistance: {selected_armour['swordres']}, Magic Resistance: {selected_armour['magicres']}")
                     input("\n\nCONTINUE")
-                   
-                   
-
             if choice == "4":
                 clear_screen()
                 print("=== SUICIDE ===")
@@ -175,6 +172,15 @@ def main():
                         print("suicide")
                         player["health"] = -99999999999999
                         exit()
+            if choice == "4":
+                misc["lastlocation"] = misc["location"]
+
+
+
+
+
+
+
 
 
 
@@ -190,6 +196,12 @@ def main():
                 misc["location"] = "Cave"
 
 
+
+
+
+
+
+
         
         if misc["location"].lower() == "cave":
             if misc["cavevisits"] == 0:
@@ -203,7 +215,7 @@ def main():
             clear_screen()
             print("=== Cave ===")
             print("What would you like to do?")
-            print("\n\n1. Go into the shiny green area\n2. Enter into the rather dark area\n3. Leave")
+            print("\n\n1. Go into the shiny green area\n2. Enter into the rather dark area\n3. Leave\n4. Other")
             choice = input("\n> ")
             if choice == "1" or "2":
                 misc["lastlocation"] = misc["location"]
@@ -211,14 +223,25 @@ def main():
             if choice == "3":
                 misc["location"] = "Village"
                 misc["lastlocation"] = misc["location"]
+            if choice == "4":
+                misc["lastlocation"] = "cave"
+                misc["location"] = "other"
         
+
+
+
+
+
+
 
 
         if misc["location"].lower() == "notadded":
             clear_screen()
-            print("Sorry!\n\n\nThis place hasn't been added yet as this was made primarily in a 22 hour coding sprint! Enter literally anything to go back :3")
+            print("Sorry!\n\n\nThis place hasn't been added yet as this was made primarily in a 30 hour coding sprint! Enter literally anything to go back :3")
             input("\n> ")
             misc["location"] = misc["lastlocation"]
+        
+
         
 
             
