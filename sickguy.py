@@ -5,7 +5,7 @@ import os
 
 player = {
     "name": "bob",
-    "health": 100,
+    "health": 80,
     "max_health": 100,
     "damage": 2,
     "speed": 20,
@@ -19,13 +19,34 @@ player = {
     
 }
 
+inventory = {
+    "bandaid": 0,
+    "l1healpot": 2,
+    "bow": 1,
+    "ironsword": 1,
+    "arrow": 15,
+
+}
+
+weapons = {
+    "fists": True,
+    "ironsword": True,
+    "bow": True,
+    "Katana": False,
+    "Firebow": False,
+    
+}
+
+
+magic = False
+
 #confidence 1-10
 #
 
 enemy_templates = [
-    {"name": "Goblin", "hp": 10, "dropgold": 5, "attack": 3, "luck": 10, "confidence": 1,},
-    {"name": "Golem", "hp": 40, "dropgold": 20, "attack": 5, "luck": 0, "confidence": 8,},
-    {"name": "Skeleton", "hp": 15, "dropgold": 10, "attack": 5, "luck": 0, "confidence": 5,},
+    {"name": "Goblin", "hp": 10, "dropgold": 5, "attack": 3, "luck": 10, "confidence": 2.2,},
+    {"name": "Golem", "hp": 40, "dropgold": 20, "attack": 5, "luck": 5, "confidence": 4 ,},
+    {"name": "Skeleton", "hp": 15, "dropgold": 10, "attack": 5, "luck": 15, "confidence": 2,},
 ]
 
 
@@ -67,7 +88,8 @@ def combat(enemy):
                 #attack
 
 
-                luck_roll = random.randint(-luck, luck)
+                luck_roll = random.uniform(-luck, luck)
+                luck_roll = round(luck_roll, 1)
                 if luck != 0: 
                     clear_screen()
                     if luck_roll == luck:
@@ -100,8 +122,9 @@ def combat(enemy):
                     damage = round(damage, 1)
                     enemy["hp"] -= damage
                     enemy["hp"] = round(enemy["hp"], 1)
-                    print(f"\nYour raw strength did {player['damage']} damage!\nIn total you did {damage} damage!\nThe {enemy['name']} has {enemy['hp']} health remaining!")
-                    time.sleep(3) 
+                    print(f"\nYour raw strength added {player['damage']} damage! (Not luck affected.)\nIn total you did {damage} damage!\nThe {enemy['name']} has {enemy['hp']} health remaining!")
+                    time.sleep(0.6)
+                    input("\n\nCONTINUE")
                     
 
 
@@ -145,28 +168,117 @@ def combat(enemy):
                             if random.random() < catch_chance:
                                 print(f"You managed to catch up!")
                                 caught = 1
-                                time.sleep(5)
+                                time.sleep(0.6)
+                                input("\n\nCONTINUE")
                             else:
                                 ranaway = 1
                                 print("The goblin got away!")
-                                time.sleep(5)
+                                time.sleep(0.6)
+                                input("\n\nCONTINUE")
                         else:
                             ranaway = 1
                             print("The goblin got away!")
-                            time.sleep(5)
+                            time.sleep(0.6)
+                            input("\n\nCONTINUE")
                 
 
 
 
 
                 if luck != 0 and ranaway == 0 and caught == 0:
-                    luck_roll = random.randint(-luck, luck)
+                    luck_roll = random.uniform(-luck, luck)
+                    luck_roll = round(luck_roll, 1)
                     if luck_roll > 0:
-                        print(f"Your enemmy acquires {luck_roll} extra damage through luck.")
-                        time.sleep(5)
+                        print(f"Your enemy acquires {luck_roll} extra damage through luck.")
                     if luck_roll < 0:
                         print(f"Your enemy looses {luck_roll} damage through luck.")
-                        time.sleep(5)
+                    if luck_roll == 0:
+                        print("Your enemies luck damage stays unchanged!")
+                if ranaway == 0 and caught == 0:
+                    damage = luck_roll + enemy['attack']
+                    damage = round(damage, 1)
+                    player['health'] -= damage
+                    time.sleep(3)
+                    print(f"\nYou took {damage} damage! You have {player['health']} health left.")
+                    time.sleep(0.6)
+                    input("\n\nCONTINUE")
+
+
+
+        if choice == "2":
+            if magic == True:
+                choice2 = input("Would you like to do magic or heal?\n > ")
+            else:
+                choice2 = "y"
+        
+        if choice2.lower() in ["y", "yes"]:
+            clear_screen()
+            print(f"{inventory['bandaid']} - BANDAIDS (1)")
+            print(f"{inventory['l1healpot']} - HEALING POTIONS (2)")
+            bandaids = inventory["bandaid"]
+            l1hpot = inventory["l1healpot"]
+            choice3 = input("\n\n> ")
+            if choice3 == "1" and bandaids > 0:
+                clear_screen()
+                print("Putting this bandaid on will heal you by 5 health.")
+                print(f"Current health: {player['health']}, Max Health: {player['max_health']}")
+                print("\n\nDo you wish to consume it? (Will NOT use a turn.) Y/N")
+                choice2 = input("> ")
+                if choice2.lower() in ["y", "yes"]:
+                    clear_screen()
+                    inventory['bandaid'] -= 1
+                    player['health'] += 5
+                    if player["max_health"] < player["health"]:
+                        player["health"] = player["max_health"]
+                    print(f"Your new health is {player["health"]}.")
+                    time.sleep(0.6)
+                    input("\n\nCONTINUE")
+            elif choice3 == "1":
+                clear_screen()
+                print("You do not have any bandaids to apply.")
+                time.sleep(0.6)
+                input("\n\nCONTINUE")
+
+
+            if choice3 == "2" and l1hpot > 0:
+                clear_screen()
+                print("Drinking this will heal you by 15 health.")
+                print(f"Current health: {player['health']}, Max Health: {player['max_health']}")
+                print("\n\nDo you wish to consume it? (Will NOT use a turn.) Y/N")
+                choice2 = input("> ")
+                if choice2.lower() in ["y", "yes"]:
+                    clear_screen()
+                    inventory['l1healpot'] -= 1
+                    player['health'] += 15
+                    if player["max_health"] < player["health"]:
+                        player["health"] = player["max_health"]
+                    print(f"Your new health is {player["health"]}.")
+                    time.sleep(0.6)
+                    input("\n\nCONTINUE")
+            elif choice3 == "1":
+                clear_screen()
+                print("You do not have any health potions to consume.")
+                time.sleep(0.6)
+                input("\n\nCONTINUE")
+
+
+        if choice2 == "3":
+            clear_screen()
+            print("===AVAILABLE WEAPONS===\n\n\n")
+            index = 0
+            print("")
+
+
+
+
+
+
+
+
+            
+
+
+                   
                     
                 
             
@@ -185,5 +297,4 @@ def main():
     print("\nWhat's your name?")
     player["name"] = input("> ")
     combat(enemy_templates[0])
-
 main()
