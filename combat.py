@@ -1,4 +1,4 @@
-from game_data import player, inventory, weapons, enemy_templates
+from game_data import player, inventory, weapons, enemy_templates, misc, spells
 import random
 import time
 import os
@@ -41,7 +41,6 @@ def clear_screen():
         os.system('cls')
     else:  # macOS/Linux
         os.system('clear')
-
 
 
 
@@ -263,16 +262,6 @@ def combat(enemy, weapon_drop):
             if choice2.lower() in ["y", "yes"]:
                 player['health'] = max(player['health'] - penalty, 0)
                 ranaway = 1
-
-
-
-            
-
-
-
-
-        
-
 
 
 

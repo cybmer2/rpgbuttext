@@ -49,6 +49,9 @@ def txt1():
     input("\n")
     clear_screen()
     player["name"] = input("\n\033[1mWho am I?\033[0m\nI am.. ")
+    if player['name'] == "":
+        print("Invalid name.")
+        exit()
     clear_screen()
     print(f"Strange Woman: {player['name']}, Huh?")
     input("\n")

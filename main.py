@@ -4,10 +4,56 @@ from text import *
 import random
 import time
 import os
+import json
 
 
 
+def save_game(filename="savegame.json"):
+    save_data = {
+        "player": player,
+        "inventory": inventory,
+        "misc": misc,
+        "weapons": [{k: w[k] for k in ("name", "Obtained")} for w in weapons],
+        "spells": [{k: s[k] for k in ("name", "Obtained")} for s in spells],
+        "armours": [{k: a[k] for k in ("name", "Obtained")} for a in armours],
+    }
+    with open(filename, "w") as f:
+        json.dump(save_data, f, indent=4)
+    clear_screen()
+    print("Game Saved!")
+    input("\n> ")
 
+def load_game(filename="savegame.json"):
+    global player, inventory, misc, weapons, spells, armours
+    try:
+        with open(filename, "r") as f:
+            save_data = json.load(f)
+        player.update(save_data["player"])
+        inventory.update(save_data["inventory"])
+        misc.update(save_data["misc"])
+
+
+        for saved_weapon in save_data["weapons"]:
+            for w in weapons:
+                if w["name"] == saved_weapon["name"]:
+                    w["Obtained"] = saved_weapon["Obtained"]
+        for saved_spell in save_data["spells"]:
+            for s in spells:
+                if s["name"] == saved_spell["name"]:
+                    s["Obtained"] = saved_spell["Obtained"]
+        for saved_armour in save_data["armours"]:
+            for a in armours:
+                if a["name"] == saved_armour["name"]:
+                    a["Obtained"] = saved_armour["Obtained"]
+
+        clear_screen()
+        print("Game loaded!")
+        input("\n")
+        
+    except FileNotFoundError:
+        clear_screen()
+        print("No save file found.")
+        input("\n")
 
 
 def main():
@@ -17,8 +63,10 @@ def main():
         if misc["location"] == "Main Menu":
             print("=== Main Menu ===")
             print("What would you like to do?")
-            print("\n\n1. Start a save file.\n2. Load a save file.\n3. Play around (Sandbox)")
+            print("\n\n1. Start a save file.\n2. Load a save file.")
             choice = input("\n> ")
+            if choice == "2":
+                load_game()
             if choice == "1":
                 clear_screen()
                 txt1()
@@ -33,9 +81,9 @@ def main():
             clear_screen()
             print("=== Village ===")
             print("What would you like to do?")
-            print("\n\n1. Go to the shop\n2. Think really hard\n3. Explore\n4. Other")
+            print("\n1. Explore\n2. Misc ")
             choice = input("\n> ")
-            if choice == "4":
+            if choice == "2":
                 misc["location"] = "Other"
                 misc["lastlocation"] = "Village"
 
@@ -44,8 +92,12 @@ def main():
             clear_screen()
             print("=== Misc ===")
             print("What would you like to do?")
-            print("\n1. Save my game.\n2. Check my stats.\n3. Check my weapons.\n4. Commit suicide\n5. Eat / Heal\n6. Go back")
+            print("\n1. Save my game.\n2. Check my stats.\n3. Check my weapons.\n4. Commit suicide\n5. Eat / Heal\n6. Go back\n7. Load my game")
             choice = input("\n> ")
+            if choice == "1":
+                save_game()
+            if choice == "7":
+                load_game()
             if choice == "6":
                 misc["location"] = misc["lastlocation"]
             if choice == "2":
@@ -185,21 +237,36 @@ def main():
 
 
 
-        if choice == "3":
+        if choice == "1":
             clear_screen()
             print("=== Village ===")
             print("Where would you like to go?")
-            print("\n\n1. Spooky Cave.\n2. Mineshafts\n3. Village Outskirts.\n4. Dojo")
+            print("\n1. Spooky Cave\n2. Dojo.\n3. Home.")
             choice = input("\n> ")
             if choice == "1":
                 misc["lastlocation"] = misc["location"]
                 misc["location"] = "Cave"
-            if choice == "4":
+            if choice == "2":
                 misc["lastlocation"] = "village"
                 misc["location"] = "dojo"
+            if choice == "3":
+                misc["lastlocation"] = "village"
+                misc["location"] = "home"
 
 
-        
+
+        if misc["location"].lower() == "home":
+            clear_screen()
+            print("=== Anwen's home ===")
+            print("What would you like to do?\n\n1. Steal 2 door handles\n2. Leave")
+            choice = input("\n>")
+            if choice == "1":
+                clear_screen()
+                print("You stole 2 door handles.")
+                misc["doorhandles"] = 2
+            if choice == "2":
+                misc["location"] = "village"
+                misc["lastlocation"] = "home"
 
 
 
@@ -259,8 +326,7 @@ def main():
 
 
 
-            if choice == "2":
-                misc["doorhandles"] = 2
+
 
 
 

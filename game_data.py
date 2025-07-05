@@ -4,10 +4,8 @@ import os
 
 
 inventory = {
-    "bandaid": 0,
-    "healpot": 0,
-    "strengthpot": 0,
-    "manapot": 0,
+    "bandaid": 2,
+    "l1healpot": 0,
     "arrow": 0,
 
 }
@@ -16,11 +14,12 @@ inventory = {
 
 weapons = [
     {"name": "Fists", "Luck": 60, "Damage": 2, "Durability": False, "Obtained": True, "Ranged": False, "Magic": False},
-    {"name": "Iron sword", "Luck": 25, "Damage": 6, "Durability": 25, "Obtained": True, "Ranged": False, "Magic": False},
-    {"name": "Bow", "Luck": 60, "Damage": 20, "Durability": 80, "Obtained": True, "Ranged": True, "Magic": False},
+    {"name": "Iron sword", "Luck": 25, "Damage": 6, "Durability": 25, "Obtained": False, "Ranged": False, "Magic": False},
+    {"name": "Bow", "Luck": 60, "Damage": 20, "Durability": 80, "Obtained": False, "Ranged": True, "Magic": False},
     {"name": "Katana", "Luck": 40, "Damage": 30, "Durability": 400, "Obtained": False, "Ranged": False, "Magic": False},
-    {"name": "Firestaff", "Luck": 0, "Damage": 30, "Durability": 400, "Obtained": True, "Ranged": False, "Magic": True},
-    {"name": "Wooden Staff", "Luck": 30, "Damage": 5, "Durability": 150, "Obtained": True, "Ranged": False, "Magic": True},
+    {"name": "Firestaff", "Luck": 0, "Damage": 30, "Durability": 400, "Obtained": False, "Ranged": False, "Magic": True},
+    {"name": "Rock", "Luck": 95, "Damage": 2, "Durability": 52, "Obtained": True, "Ranged": False, "Magic": False},
+    {"name": "Stick", "Luck": 30, "Damage": 2, "Durability": 43, "Obtained": True, "Ranged": False, "Magic": False},
 ]
 
 
@@ -38,9 +37,8 @@ spells = [
     {"name": "Freeze", "Obtained": False, "Mana": 100, "Cost": 1200},
     {"name": "Double Spell", "Obtained": False, "Mana": 200, "Cost": 1000},
     {"name": "Tripple Spell", "Obtained": False, "Mana": 500, "Cost": 4000},
-    {"name": "Potion enhance", "Obtained": False, "Mana": 50, "Cost": 300},
-    {"name": "Mana Trickery", "Obtained": False, "Mana": 0, "Cost": 2500},
-    {"name": "Strong Arm", "Obtained": False, "Mana": 100, "Cost": 100},
+
+
 ]
 
 enemy_templates = [
@@ -70,7 +68,7 @@ player = {
 
     "swordskill": 0, #max 10
     "magicskill": 0, #max 10
-    "damage": 1, #raw strength
+    "damage": 2.5, #raw strength
 
     #general
 
@@ -80,10 +78,10 @@ player = {
 
     #weapon
 
-    "weapon": "Fists",
+    "weapon": "Stick",
     "weapondamage": 2,
-    "weaponluck": 60,
-    "weapondurability": False,
+    "weaponluck": 30,
+    "weapondurability": 43,
     "magic": False,
     "ranged": False,
 
