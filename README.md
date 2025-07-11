@@ -34,15 +34,15 @@ iwr https://astral.sh/uv/install.ps1 -useb | iex
 
 5. Run it. To do so, on linux run these 3 commands:
 
-uv venv
-source .venv/bin/activate
-python main.py
+first; uv venv
+second; source .venv/bin/activate
+third; python main.py
 
 If you're on windows:
 
-uv venv
-.venv\Scripts\activate (if in command prompt. If in powershell, run: .venv\Scripts\Activate.ps1)
-python main.py
+first; uv venv
+second; .venv\Scripts\activate (if in command prompt. If in powershell, run: .venv\Scripts\Activate.ps1)
+third; python main.py
 
 
 
