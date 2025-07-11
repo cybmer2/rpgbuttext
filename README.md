@@ -1,35 +1,48 @@
-There are 4 main files assosciated with the text based RPG kernel.
-It has functionality ready, which can be expanded on quickly.
-
-It has save game compatability, which saves into a .json file.
 
 
-# INSTALLING PYTHON
+## About
 
-To run it, first download python, on linux it's easy. Run whichever command fits your OS in the terminal.
+A kernel for a text based RPG (Made to be modified)
 
-Linux Fedora:
-sudo dnf install python3 python3-pip
+## Features
 
-Arch Linux:
-sudo pacman -S python python-pip
-
-Debian:
-sudo apt install python3 python3-pip
+1. Combat system
+2. Customizeable weapons
+3. Customizeable enemies
 
 
-For windows, follow the guide on https://www.python.org/downloads/
+## Usage 
 
+1. Install "uv" (A fast python package manager)
 
+On linux run:
 
-# RUNNING IT
-
-
-Then download all .py files, and put them in the same folder. Then run main.py with python.
-
-Have fun!
+curl -Ls https://astral.sh/uv/install.sh | sh
 
 
 
+On windows:
+(Powershell / Command Prompt)
+iwr https://astral.sh/uv/install.ps1 -useb | iex
 
-Feel free to modify the kerenel for your own use.
+
+2. Download all the files (main.py, combat.py, text.py, game_data.py)
+
+3. Put all the files in the same folder.
+
+4. Go to the directory and start a command prompt there.
+
+5. Run it. To do so, on linux run these 3 commands:
+
+uv venv
+source .venv/bin/activate
+python main.py
+
+If you're on windows:
+
+uv venv
+.venv\Scripts\activate (if in command prompt. If in powershell, run: .venv\Scripts\Activate.ps1)
+python main.py
+
+
+
