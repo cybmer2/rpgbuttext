@@ -11,7 +11,7 @@ A kernel for a text based RPG (Made to be modified)
 3. Customizeable enemies
 
 
-## Usage 
+## Installing
 
 1. Install "uv" (A fast python package manager)
 
@@ -32,17 +32,27 @@ iwr https://astral.sh/uv/install.ps1 -useb | iex
 
 4. Go to the directory and start a command prompt there.
 
-5. Run it. To do so, on linux run these 3 commands:
 
-first; uv venv
-second; source .venv/bin/activate
-third; python main.py
 
-If you're on windows:
+## Running it
 
-first; uv venv
-second; .venv\Scripts\activate (if in command prompt. If in powershell, run: .venv\Scripts\Activate.ps1)
-third; python main.py
+# Linux;
+
+Run these 3 commands.
+
+1.  uv venv
+2. source .venv/bin/activate
+3. python main.py
+
+
+# Windows
+
+Run these 3 commands.
+
+
+1. uv venv
+2. .venv\Scripts\activate (if in command prompt. If in powershell, run: .venv\Scripts\Activate.ps1)
+3. python main.py
 
 
 
